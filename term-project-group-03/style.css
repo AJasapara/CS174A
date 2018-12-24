@@ -1,0 +1,71 @@
+.canvas-widget {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  background: none !important;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  top:20px;
+   user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.blinking{
+    animation:blinkingText 0.8s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: #fff;    }
+    49%{    color: #fff; }
+    50%{    color: transparent; }
+    99%{    color: transparent;  }
+    100%{   color: #fff;    }
+}
+
+.blinkingRed{
+    animation:blinkingText2 0.8s infinite;
+}
+@keyframes blinkingText2{
+    0%{     color: red;    }
+    49%{    color: red; }
+    50%{    color: transparent; }
+    99%{    color: transparent;  }
+    100%{   color: red;    }
+}
+
+#score {
+  font-family: 'Press Start 2P';
+  font-size: 30px;
+}
+
+#game-over {
+  top: 250px;
+  font-family: 'Press Start 2P';
+  font-size: 100px;
+  color: red;
+}
+
+#start {
+  top: 475px;
+  font-size: 20px;
+/*   background-color: rgba(0,0,0,0.5) !important; */
+  font-family: 'Press Start 2P';
+}
+
+#title {
+  top: 275px; 
+  font-size: 80px;
+  font-family: 'Press Start 2P';
+  color: yellow
+}

@@ -1,0 +1,90 @@
+<!-- Graphics Example Code.  index.html - The web page document containing the canvas (drawing surface), that launches your javascript files. //-->
+<!DOCTYPE html> <html> <head> <meta charset="UTF-8"/> <link rel="icon" href="assets/fav.ico"> <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+<script src=   "audio.js" ></script> 
+<script>
+  window.onload = init;
+var context;
+var bufferLoader;
+var source1;
+var source2;
+var first_start = false;
+var start_time = 0.0;
+
+function init() {
+  window.AudioContext = window.AudioContext || window.webkitAudioContext;
+  context = new AudioContext();
+  bufferLoader = new BufferLoader(context, ['/assets/Africa-full.mp3', '/assets/gameOver.mp3'], finishedLoading);
+  bufferLoader.load();
+}
+
+function finishedLoading(bufferList) {
+  // Create two sources and play them both together.
+  source1 = context.createBufferSource();
+  source1.buffer = bufferList[0];
+  source1.connect(context.destination);
+  source2 = context.createBufferSource();
+  source2.buffer = bufferList[1];
+  source2.connect(context.destination);
+  let el = document.getElementById("start");
+  let className = "hidden";
+  if (el.classList)
+    el.classList.remove(className);
+  else
+    el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+}
+
+function start_game() {
+  first_start = true;
+  let el = document.getElementById("start");
+  let className = "hidden";
+  if (el.classList)
+    el.classList.add(className);
+  else
+    el.className += ' ' + className;
+  el = document.getElementById("title");
+  className = "hidden";
+  if (el.classList)
+    el.classList.add(className);
+  else
+    el.className += ' ' + className;
+  source1.start(0);
+}
+</script>
+<script> window.tiny_graphics = {};             // Store all our JavaScipt code inside of classes here.
+         window.classes = {}                    
+         </script>          
+                                      <!--  Javascript "include" files.  Any code in them gets executed as part of the page loading: //-->
+<script>
+  let GAME_OVER = false;
+</script>
+
+                                    
+<script src="tiny-graphics.js" ></script>
+<script src= "dependencies.js" ></script>
+<script src=   "main-scene.js" ></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+
+<body style="background: DarkGray">       <!-- Begin typing your web page here. //-->
+                              <!-- The following code embeds a WebGL canvas panel widget with certain scenes and their controls. //-->
+<div id="main-canvas" class="canvas-widget">
+  <div id="game-over" class="overlay hidden blinkingRed">GAME OVER</div>
+  <div class="overlay"> 
+    <label id="score">00</label>
+  </div>
+  <div onclick="start_game()" class="overlay hidden blinking" id="start">
+    > CLICK TO DEFEND EARTH <
+  </div>
+  <div id="title" class="overlay">ASTRO BLASTERS</div>
+</div>
+<script> "use strict"     // ********************* THE ENTRY POINT OF YOUR WHOLE PROGRAM STARTS HERE ********************* 
+                                           // Use this code to embed a widget into any web page.  The widget inclues a 3D WebGL area
+                                           // (an HTML canvas) and various panels of controls.
+  const scenes = [ "Project" ]; // themselves with this widget's Canvas_Manager so that their code can be called upon
+                                                // every time a draw / keyboard / mouse event happens on the web page.
+  new Canvas_Widget( "main-canvas", scenes );             // Use the Canvas_Widget class to display the WebGL demo.  Pass in
+                                                          // the name of the HTML element we are to replace with the widget.
+</script>
+                             <!-- The following code embeds a code navigator widget with links to classes. //-->
+</body></html>
